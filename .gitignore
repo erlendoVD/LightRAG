@@ -21,3 +21,6 @@ rag_storage
 venv/
 examples/input/
 examples/output/
+data\ anbud/
+data\ RAG/
+datatest/

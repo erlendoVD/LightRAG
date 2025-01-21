@@ -19,7 +19,19 @@ AZURE_OPENAI_ENDPOINT = os.getenv("AZURE_OPENAI_ENDPOINT")
 AZURE_EMBEDDING_DEPLOYMENT = os.getenv("AZURE_EMBEDDING_DEPLOYMENT")
 AZURE_EMBEDDING_API_VERSION = os.getenv("AZURE_EMBEDDING_API_VERSION")
 
-WORKING_DIR = "./dickens"
+base_folder = "./data RAG"
+projects = [name for name in os.listdir(base_folder) if os.path.isdir(os.path.join(base_folder, name))]
+
+# Display available projects and prompt user to select one
+print("Available projects:")
+for i, project in enumerate(projects, 1):
+    print(f"{i}. {project}")
+
+project_index = int(input("Select the project number: ")) - 1
+project = projects[project_index]
+
+WORKING_DIR = f"./data RAG/{project}"
+#print("HEEELLO", os.path.abspath(WORKING_DIR))
 
 if os.path.exists(WORKING_DIR):
     import shutil
@@ -90,10 +102,11 @@ rag = LightRAG(
     ),
 )
 
-book1 = open("./book_1.txt", encoding="utf-8")
-book2 = open("./book_2.txt", encoding="utf-8")
+book1 = open(f"./data anbud/{project}/TXT/{project}.txt", encoding="utf-8")
+#book2 = open(f"./data anbud/{PROSJEKT}/Anbud2.txt", encoding="utf-8")
 
-rag.insert([book1.read(), book2.read()])
+rag.insert([book1.read()])
+#rag.insert([book1.read(), book2.read()])
 
 query_text = "What are the main themes?"
 
